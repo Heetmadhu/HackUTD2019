@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="top">#980000</color>
+    <color name="color_top">#980000</color>
+    <color name="color_r_wrist">#ff0000</color>
+    <color name="color_l_wrist">#87fd00</color>
+    <color name="color_r_ankle">#ff6a4d</color>
+    <color name="color_l_ankle">#2169f9</color>
+    <color name="color_background">#be9268</color>
+    <color name="color_white">#FFF</color>
+</resources>
