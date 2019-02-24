@@ -340,6 +340,7 @@ public class Camera2BasicFragment extends Fragment implements  FragmentCompat.On
 
         if(counter%50 == 0){
             String str= "";
+            boolean flag = false;
             HashSet<String> uniqueValues = new HashSet<>(objects);
             for(String value:uniqueValues){
                 int lableCounts = 0;
@@ -372,7 +373,7 @@ public class Camera2BasicFragment extends Fragment implements  FragmentCompat.On
                             if(width>=0 && height>=0){
                                 setBitmap(Bitmap.createBitmap(originalBitmap,
                                         x,y,width,height));
-
+                                flag = true;
                             }
 
 
@@ -386,6 +387,10 @@ public class Camera2BasicFragment extends Fragment implements  FragmentCompat.On
             objects.clear();
             Log.d(TAG, "SPEAK: "+str);
             textToSpeech.speak(str,TextToSpeech.QUEUE_ADD,null);
+            if(flag){
+                textToSpeech.speak("Do you want more information about person infront of camera?",TextToSpeech.QUEUE_ADD,null);
+                startActivityForResult(intent,10);
+            }
 
 
         }
@@ -509,7 +514,14 @@ public class Camera2BasicFragment extends Fragment implements  FragmentCompat.On
                 {
                     Log.d("ActRes","All Ok");
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    if(result.size()>0){
 
+                        String str = result.get(0);
+                        if(str.equalsIgnoreCase("yes") || str.equalsIgnoreCase("sure") ||
+                                str.equalsIgnoreCase("please") || str.equalsIgnoreCase("please")){
+                            personRecognition.processImage(croppedBitmap,textToSpeech);
+                        }
+                    }
                 }
 
                 break;

@@ -112,7 +112,7 @@ public class PersonRecognition {
                             Log.d("GLASSES" , face.faceAttributes.glasses + "");
 
                             String res = "The person is a " + face.faceAttributes.gender + " approximately "
-                                    + face.faceAttributes.age + " years old "+ face.faceAttributes.gender+",";
+                                    + (int)face.faceAttributes.age + " years old "+ face.faceAttributes.gender+",";
 
                             if (!face.faceAttributes.glasses.toString().equals("NoGlasses")) {
                                 res += "and wears glasses";
