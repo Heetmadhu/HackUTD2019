@@ -233,6 +233,26 @@ public class Camera2BasicFragment extends Fragment implements  FragmentCompat.On
 
     };
 
+    public void takeInputAfterSpeaking(){
+
+        final Handler h =new Handler();
+
+        Runnable r = new Runnable() {
+
+            public void run() {
+
+                if (!textToSpeech.isSpeaking()) {
+                    startActivityForResult(intent,10);
+                }
+
+                h.postDelayed(this, 1000);
+            }
+        };
+
+        h.postDelayed(r, 1000);
+    }
+
+
     /**
      * An additional thread for running tasks that shouldn't block the UI.
      */
@@ -369,7 +389,12 @@ public class Camera2BasicFragment extends Fragment implements  FragmentCompat.On
                             if(y < 0){
                                 y = 0;
                             }
-
+                            if(x+width> originalBitmap.getWidth()){
+                                width = originalBitmap.getWidth()-x;
+                            }
+                            if(y+height> originalBitmap.getHeight()){
+                                height = originalBitmap.getHeight()-y;
+                            }
                             if(width>=0 && height>=0){
                                 setBitmap(Bitmap.createBitmap(originalBitmap,
                                         x,y,width,height));
@@ -389,7 +414,7 @@ public class Camera2BasicFragment extends Fragment implements  FragmentCompat.On
             textToSpeech.speak(str,TextToSpeech.QUEUE_ADD,null);
             if(flag){
                 textToSpeech.speak("Do you want more information about person infront of camera?",TextToSpeech.QUEUE_ADD,null);
-                startActivityForResult(intent,10);
+                takeInputAfterSpeaking();
             }
 
 
